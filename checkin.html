@@ -1,19 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Office Visitor Check-In</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Detertech Visitor Check-In</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0E0153;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 40px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      color: #F7FF00;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      background-color: #ffffff10;
+      color: #fff;
+    }
+
+    input::placeholder {
+      color: #cccccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #F7FF00;
+      color: #0E0153;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #dede00;
+    }
+
+    #status {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h2>Office Visitor Check-In</h2>
-
-  <form id="visitorForm">
-    <label for="name">Name:</label>
-    <input type="text" id="name" required>
-    <button type="submit">Check In</button>
-  </form>
-
-  <p id="status" style="margin-top: 1em;"></p>
+  <div class="container">
+    <h1>Detertech</h1>
+    <form id="visitorForm">
+      <label for="name">Visitor Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required />
+      <button type="submit">Check In</button>
+    </form>
+    <p id="status"></p>
+  </div>
 
   <script>
     document.getElementById('visitorForm').addEventListener('submit', async function (e) {
@@ -26,9 +102,7 @@
       try {
         const response = await fetch('https://visitor-api.detertechnls.workers.dev', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
 
@@ -36,7 +110,7 @@
           throw new Error("Server error: " + response.status);
         }
 
-        document.getElementById('status').textContent = "✅ Check-in successful!";
+        document.getElementById('status').textContent = "✅ Successfully checked in!";
         document.getElementById('visitorForm').reset();
       } catch (err) {
         document.getElementById('status').textContent = "❌ Error: " + err.message;
