@@ -17,7 +17,7 @@
       const timestamp = new Date().toISOString();
       const data = { name, timestamp };
 
-      fetch('visitor.json', {
+      fetch('https://visitor-api.detertechnls.workers.dev', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
